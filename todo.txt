@@ -1,0 +1,15 @@
+CARDS:
+
+gain % of money
+
+put <x> into card. card balance gains y% per turn. when card is used up, receive total balance. 
+
+double effect of next card bought
+
+double effect of next card used
+
+double duration of all active effects
+
+
+TODO
+the positional thing of each card needs to be tied to card_class
