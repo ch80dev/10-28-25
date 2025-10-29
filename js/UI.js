@@ -6,19 +6,17 @@ class UI{
 	get_card(id, card, for_market){
 		//console.log(id, card, for_market);
 		let buyable_class = "";
-		//console.log(card.cost + id);
 		if (for_market && game.player.money < card.cost + Number(id)){
 			buyable_class = ' no_buy '
 		}
 		let market_label = "";
-		if (for_market){
-			
-			market_label = `<div class='market_expires'>[ ${card.market_expires} ]</div>
-			<div class='card_cost'>Cost: $${card.cost + Number(id)} (+${id})</div>`
+		if (for_market){			
+			market_label = `<div class='market_expires market_expires-${card.market_expires}'>[ ${card.market_expires} ]</div>
+			<div class='card_cost'> -$${card.cost + Number(id)}</div>`
 		}
 		return `<div id='hand-${id}' class='card ${buyable_class} ${card.category}'>
 			<div class='card_header'>${card.uses}</div>
-			<div class='card_description'>${Config.card_descriptions[card.effect_type](card.effect_params)}</div>
+			<div class='card_description'>${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}</div>
 			${market_label}
 		</div>`
 	}
@@ -40,8 +38,10 @@ class UI{
 		txt = "";
 		for (let effect of game.player.effects){
 			let params = Object.entries(effect.params).map(([k,v]) => `${k}: ${v}`).join(", ");
-			txt += `<div>${effect.name}: ${params}</div>`
+			txt += `<div class='effect'>${effect.name}: ${params}</div>`
 		}
 		$("#effects").html(txt);
+		$("#turn_section").html(game.turns);
+		$("#total_earnings_section").html("$" + game.player.total_earned + " [" + game.card_class + "]");
 	}
 }

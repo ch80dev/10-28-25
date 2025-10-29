@@ -20,9 +20,9 @@
 		.card_cost{
 			position: absolute;
 			bottom: 0;
-			width: 100%;
-			background-color: yellow;
+			width: 100%;			
 			font-size: 20px;
+			color: red;
 		}
 		.card_description{
 			font-size: 15px;
@@ -36,6 +36,9 @@
 			cursor: pointer;
 			background-color: lightblue;
 		}
+		.effect{
+			margin: 10px;
+		}
 		.income{
 			background-color: lightgreen;
 			color: darkgreen;
@@ -44,9 +47,17 @@
 			position: absolute;
 			bottom: 30px;
 			width: 100%;
-			background-color: orange;
 			font-size: 20px;
 		}
+		.market_expires-1 {
+			background-color: red;
+		}
+		.market_expires-2 {
+			background-color: yellow;
+		}
+		.market_expires-3{
+			background-color: orange;
+		}		
 		.no_buy {
 			opacity: 0.5;
 		}
@@ -76,6 +87,7 @@
 		}
 		#hand_area{
 			position: fixed;
+			padding-left: 250px;
 			bottom: 0;
 			left: 0;
 			width: 100%;
@@ -84,14 +96,29 @@
 			z-index: 1000;
 		}
 		#market{
-			margin-top: 100px;
-			margin-bottom: 250px;
-			text-align: center;
+			margin: 250px;
+			
+			
+			text-align: left;
+		}
+		#total_earnings_section {
+			position: fixed;
+			right: 0;
+			margin-right: 50px;
+		}
+		#turn_section{
+			position: fixed;
+			left: 0;
+			margin-left: 50px;
 		}
 	</style>
 </head>
 <body>
-	<div id="info_bar">$<span id='money'></span></div>
+	<div id="info_bar">
+		<span id="turn_section"></span>
+		<span id='money_section'>$<span id='money'></span></span>
+		<span id="total_earnings_section"></span>
+	</div>
 	<div id="market"></div>
 	<div id="effects"></div>
 	<div id="hand_area"></div>

@@ -2,7 +2,7 @@ const player_effect_handlers = {
     income_per_turn: {
         apply: (game, player, params) => {               
             player.earn(game, params.amount);
-            console.log('EFFECT: income_per_turn ', params.amount);
+            //console.log('EFFECT: income_per_turn ', params.amount);
         }, remove: (player, params) => {        
          
         }
@@ -10,8 +10,8 @@ const player_effect_handlers = {
 
     boost_income: {
         apply: (game, player, params) => {        
-            console.log('EFFECT: boost_income - still active');
-        }, remove: (player, params) => {        
+            //console.log('EFFECT: boost_income - still active');
+        }, remove: (game, player, params) => {     
             player.bonus -= params.remove_bonus_when_expires;
         }
     }
@@ -29,12 +29,16 @@ class Player {
     earn(game, amount){
         this.money += amount + this.bonus;
         this.total_earned += amount + this.bonus;
-        let new_card_class = Math.ceil(this.total_earned / 10);
+        let new_card_class = this.get_card_class(this.total_earned);
         if (new_card_class > game.card_class){
             game.card_class = new_card_class;
         }
     }
-
+    get_card_class(n) {
+        if (n < 11) return 1; // handle 0 or negatives gracefully
+        const pow = Math.floor(Math.log10(n)); // number of digits - 1
+        return Math.pow(10, pow);
+    }
     spend(amount){
         if (this.money < amount){
             return false;
@@ -42,13 +46,12 @@ class Player {
         this.money -= amount;
     }
     run_effects(game){
-        console.log('run', this.effects.length);
         for (let i = this.effects.length - 1; i >= 0; i--) {
             const effect = this.effects[i];
             player_effect_handlers[effect.name].apply(game, this, effect.params);
             if (effect.params.expires_in !== undefined) effect.params.expires_in -= 1;
-            console.log(effect.params.expires_in);
             if (effect.params.expires_in <= 0 && player_effect_handlers[effect.name].remove) {
+                console.log('removing', effect);
                 player_effect_handlers[effect.name].remove(game, this, effect.params);
                 this.effects.splice(i, 1);
             }

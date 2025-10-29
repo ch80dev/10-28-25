@@ -1,6 +1,6 @@
 class CardGenerator {
     fetch_rand_category(card_class){
-        const card_categories = ['finance', 'income', 'upgrade', 'on_discard', 'play'];
+        const card_categories = ['finance', 'income', 'upgrade', 'play'];
         
         let rand_category = card_categories[fetch_rand(0, card_categories.length - 1)];
         if (card_class < 10 && rand_category == 'finance'){
@@ -44,16 +44,19 @@ class CardGenerator {
             let cost = Math.ceil(total_income * cost_modifier);
             return new Card('income', cost, card_type, params, total_uses);
         }, 
+        on_discard: (player, card_class) => {
+
+        },
         play: (player, card_class) => {
-            let play_types = ['play_neighbors', 'play_all'];
+            let play_types = ['play_all'];
             let card_type = play_types[fetch_rand(0, play_types.length - 1)];    
             let total_uses = fetch_rand(3, 6);
             let cost_modifier = .5;
             if (card_type == 'play_all'){
                 cost_modifier = 1;
             }
-            let cost = Math.ceil(player.total_earned * cost_modifier);
-            return new Card('income', cost, card_type, params, total_uses);
+            let cost = Math.ceil(player.total_earned * cost_modifier) + 1;
+            return new Card('play', cost, card_type, {}, total_uses);
         },
         
         upgrade: (player, card_class) => {
@@ -79,12 +82,17 @@ class CardGenerator {
             return card;
             
         }
-        console.log(`${rand_category} generation failed.`);           
-        
+        return null;
     }
 
     go(player, card_class){
-        return this.get(player, card_class);
+        while(true){
+            let card= this.get(player, card_class);
+            if (card != null){
+                return card;
+            }
+        }
+        
 
 
     }
