@@ -34,7 +34,7 @@ class CardGenerator {
         }, 
         
         income: (player, card_class) => {
-            let income_types = ['gain_immediate', 'gain_per_turn'];
+            let income_types = ['gain_immediate'];
             let card_type = income_types[fetch_rand(0, income_types.length - 1)];    
             let total_uses = fetch_rand(3, 6);
             let modifier = fetch_rand(1, 3);

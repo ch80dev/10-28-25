@@ -29,13 +29,13 @@ class UI{
 		card_txt += market_header;
 		card_txt += 	
 			`<div id='${card_is_where}-${id}' class='card ${buyable_class} ${market_expires} '>
-				<div class='card_header'>
+				<div class='card_header ${card.category}'>
 					<span class='card_uses'>${uses}</span>							
 				</div>
 				<div class='card_description'>
 					${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}
-				</div><div class='card_footer'>
-					<span class='card_class'>[ ${card.class} ]</span>
+				</div><div class='card_footer ${card.category}'>
+					<span class='card_class'>[ ${card.class.toLocaleString()} ]</span>
 				</div>
 			</div>`
 		card_txt += market_footer;
@@ -51,11 +51,11 @@ class UI{
 			card = game.market[id];
 		}
 		if(where == 'hand' && card.effect_type == 'gain_immediate'){
-			let new_balance = (game.player.money + card.effect_params.amount).toLocaleString();
+			let new_balance = (game.player.money + card.effect_params.amount + game.player.bonus).toLocaleString();
 			$("#money").html(new_balance);
 			$("#money_section").css("font-weight", 'bold');
-			$("#money_change").html(` (+${card.effect_params.amount})`);
-			$("#money_change").css('color', 'green');
+			$("#money_change").html(` (+${(card.effect_params.amount + game.player.bonus).toLocaleString()})`);
+			$("#money_change").css('color', '#00FF88');
 		} else if (where == 'market'){
 			console.log(card.cost);
 			let new_balance = (game.player.money - card.cost).toLocaleString();
@@ -63,7 +63,7 @@ class UI{
 			$("#money_section").css("font-weight", 'bold');
 			$("#money_change").html(` (-${card.cost})`);
 			console.log($("#money_change").html())
-			$("#money_change").css('color', 'red');
+			$("#money_change").css('color', '#FF3B3B');
 		}
 	}
 

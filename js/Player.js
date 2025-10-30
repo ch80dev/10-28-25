@@ -27,6 +27,7 @@ class Player {
     }
 
     earn(game, amount){
+        console.log(game, amount)
         this.money += amount + this.bonus;
         this.total_earned += amount + this.bonus;
         let new_card_class = this.get_card_class(this.total_earned);

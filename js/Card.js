@@ -43,8 +43,9 @@ const card_effect_handlers = {
 
     },
     yield: (game, player, params) => {
-        let interest = player.money * params.growth_factor;
-        player.earn(interest);
+        let interest = player.money * (params.growth_factor - 1);
+        console.log('yield', interest, player.money, params.growth_factor);
+        player.earn(game, interest);
     },
     play_neighbors: (game, player, params, id) => {
         let prev_id = id - 1;
