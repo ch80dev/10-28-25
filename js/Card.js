@@ -76,7 +76,6 @@ class Card {
         this.market_expires = 5;
         this.uses = uses;                 // Number of times this card can be used
         this.uid = crypto.randomUUID();
-        console.log(this.uid);
     }
     dies(){
         this.market_expires --;

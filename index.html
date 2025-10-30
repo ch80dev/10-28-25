@@ -150,6 +150,17 @@
 			padding-top: 100px;
 			text-align: left;
 		}
+		#money_change {
+			  position: absolute;
+			left: 100%;        /* places it immediately to the right of #money */
+			margin-left: 6px;  /* small gap */
+			white-space: nowrap;
+			pointer-events: none; /* prevent accidental hover effects */
+		}
+		#money_section {
+			position: relative;
+  			display: inline-block;
+		}
 		#total_earnings_section {
 			position: fixed;
 			right: 0;
@@ -164,7 +175,7 @@
 </head>
 <body>
 	<div id="info_bar">
-		<span id='money_section'>$<span id='money'></span></span>
+		<span id='money_section'>$<span id='money'></span><span id="money_change"></span></span>
 		<span id="card_class"></span>
 	</div>
 	<div id="market"></div>
