@@ -17,6 +17,9 @@ class Game{
 	}
 
 	buy(id){
+		if (this.turns >= Config.max_turns){
+			return;
+		}
 		let card = this.market[id];
 		if (this.player.money < card.cost){
 			return;
@@ -31,16 +34,11 @@ class Game{
 	
 
 	discard(id){
-		//console.log('discarding', id, typeof id)
 		let card = this.hand[id];
-		//console.log(card);
 		if (card.effect_type == 'invest'){
-			console.log('INVEST VESTEd', card.effect_params, card.effect_params.balance, typeof card.effect_params.balance);
 			this.player.earn(this, card.effect_params.balance);
 		}
-		//console.log('about to discard', this.hand);
 		this.hand.splice(id, 1);
-		//console.log('discarded', this.hand);
 	}
 
 	does_card_expire(uid){
@@ -60,11 +58,16 @@ class Game{
 		this.player.run_effects(this);
 		for (let card of this.hand){
 			if (card.effect_type == 'invest'){
-				//console.log(card.effect_params);
 				card.effect_params.balance = Math.round(card.effect_params.balance * card.effect_params.growth_factor);
 			}			
 		}
 		this.turns ++;
+		if (this.turns >= Config.max_turns){
+			$('#game_overlay')
+  				.css('pointer-events', 'auto') // block input after fade in
+  				.css('opacity', 1);  
+		}
+
 	}
 
 	is_card_in_hand(type){
@@ -86,6 +89,9 @@ class Game{
 	}
 
 	play(id){
+		if (this.turns >= Config.max_turns){
+			return;
+		}
 		let card = this.hand[id];
 		let uid = card.uid;
 		card.play(this, this.player, id);

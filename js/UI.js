@@ -4,7 +4,6 @@ class UI{
 	}
 
 	get_card(id, card, for_market){
-		//console.log(id, card, for_market);
 		let buyable_class = "";		
 		let card_txt = "<div class='card_container'>";
 		let card_is_where = 'hand';
@@ -46,7 +45,6 @@ class UI{
 	hover(where, id){
 		
 		let card = game.hand[id];
-		console.log(where, id);
 		if (where == 'market'){
 			card = game.market[id];
 		}
@@ -106,7 +104,13 @@ class UI{
 			txt += `<div class='effect'>${Config.effect_descriptions[effect.name](effect.params)}</div>`
 		}
 		$("#effects").html(txt);
-		$("#turn_section").html(game.turns);
+		$("#turn_section").html(Config.max_turns - game.turns);
+		if (Config.max_turns - game.turns <= 25){
+			$("#turn_section").css('color', "#ffd700");
+		} else if (Config.max_turns - game.turns <= 10){
+			$("#turn_section").css('font-weight', 'bold');
+			$("#turn_section").css('color', "#FF3B3B");	
+		}
 		$("#total_earnings_section").html("$" + game.player.total_earned.toLocaleString() );
 		$("#card_class").html(" [" + game.card_class.toLocaleString() + "]");
 	}

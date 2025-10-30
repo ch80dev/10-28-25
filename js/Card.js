@@ -10,9 +10,7 @@ const card_effect_handlers = {
         });
     },
     gain_immediate: (game, player, params) => {
-        player.earn(game,  params.amount);
-        
-        //console.log(`${player.name} gains $${params.amount} immediately.`);
+        player.earn(game,  params.amount);        
     },
 
     gain_per_turn: (game, player, params) => {
@@ -20,7 +18,6 @@ const card_effect_handlers = {
             amount: params.amount,
             expires_in: params.expires_in
         });
-        //console.log(`${player.name} will gain $${params.amount} per turn for ${params.turns} turns.`);
     },
 
     invest: (game, player, params) => {
@@ -44,7 +41,6 @@ const card_effect_handlers = {
     },
     yield: (game, player, params) => {
         let interest = player.money * (params.growth_factor - 1);
-        console.log('yield', interest, player.money, params.growth_factor);
         player.earn(game, interest);
     },
     play_neighbors: (game, player, params, id) => {
@@ -68,7 +64,6 @@ const card_effect_handlers = {
 class Card {
     // Explicit property declarations
     constructor( category, cost, effect_type, effect_params, uses = 1, card_class) {   
-        //console.log( category, cost, effect_type, effect_params, uses);
         this.category = category;         // e.g., "Direct Income", "Investment", "Upgrade"
         this.class = card_class;
         this.cost = cost;                 // How much money it costs to play the card

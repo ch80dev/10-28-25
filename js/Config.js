@@ -14,7 +14,9 @@ class Config {
 	};
 
 	static effect_descriptions = {
-		boost_income: (params) => `+${params.remove_bonus_when_expires} to income for ${params.expires_in} turn(s)`,
-		income_per_turn: (params) => `+${params.amount} per turn for ${params.expires_in} turn(s)`,
+		boost_income: (params) => 
+			`+${params.remove_bonus_when_expires.toLocaleString()} to income for ${params.expires_in} turn(s)`,
+		income_per_turn: (params) => `+${params.amount.toLocaleString()} per turn for ${params.expires_in} turn(s)`,
 	};
+	static max_turns = 100;
 }

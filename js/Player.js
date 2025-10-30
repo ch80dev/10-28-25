@@ -2,7 +2,6 @@ const player_effect_handlers = {
     income_per_turn: {
         apply: (game, player, params) => {               
             player.earn(game, params.amount);
-            //console.log('EFFECT: income_per_turn ', params.amount);
         }, remove: (player, params) => {        
          
         }
@@ -10,7 +9,6 @@ const player_effect_handlers = {
 
     boost_income: {
         apply: (game, player, params) => {        
-            //console.log('EFFECT: boost_income - still active');
         }, remove: (game, player, params) => {     
             player.bonus -= params.remove_bonus_when_expires;
         }
@@ -27,7 +25,6 @@ class Player {
     }
 
     earn(game, amount){
-        console.log(game, amount)
         this.money += amount + this.bonus;
         this.total_earned += amount + this.bonus;
         let new_card_class = this.get_card_class(this.total_earned);
@@ -52,7 +49,6 @@ class Player {
             player_effect_handlers[effect.name].apply(game, this, effect.params);
             if (effect.params.expires_in !== undefined) effect.params.expires_in -= 1;
             if (effect.params.expires_in <= 0 && player_effect_handlers[effect.name].remove) {
-                console.log('removing', effect);
                 player_effect_handlers[effect.name].remove(game, this, effect.params);
                 this.effects.splice(i, 1);
             }

@@ -20,7 +20,7 @@ class CardGenerator {
             let finance_types = ['yield', 'invest'];
             let card_type = finance_types[fetch_rand(0, finance_types.length - 1)];
             let total_uses = fetch_rand(3, 6);
-            let growth_factor = 1 + (fetch_rand(1, 10) * .01);
+            let growth_factor = 1 + (fetch_rand(10, 20) * .01);
             let modifier = fetch_rand(1, 3);
 
             
@@ -29,7 +29,6 @@ class CardGenerator {
                 cost_modifier *= 2;
             }
             let cost = Math.round(player.total_earned * Math.pow(growth_factor, total_uses) * cost_modifier); 
-            console.log('finance', cost, card_type, growth_factor, total_uses);
             return new Card('finance', cost, card_type, { amount: card_class * modifier, growth_factor: growth_factor, balance: 0 }, total_uses, card_class);
         }, 
         
@@ -87,7 +86,6 @@ class CardGenerator {
             return card;
             
         }
-        console.log(rand_category, "get overloaded");
         return null;
     }
 
