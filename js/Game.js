@@ -34,8 +34,8 @@ class Game{
 		console.log('discarding', id, typeof id)
 		let card = this.hand[id];
 		if (card.effect_type == 'invest'){
-			console.log('INVEST VESTEd', card.effect_params, card.effect_params.balance);
-			this.player.earn(card.effect_params.balance);
+			console.log('INVEST VESTEd', card.effect_params, card.effect_params.balance, typeof card.effect_params.balance);
+			this.player.earn(this, card.effect_params.balance);
 		}
 		
 		this.hand.splice(id, 1);

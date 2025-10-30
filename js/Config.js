@@ -10,7 +10,7 @@ class Config {
 		Gains ${Math.round((params.growth_factor - 1) * 100)}% every turn. Collect balance when it is discarded.`,
 		play_all: (params) =>  `Play all cards in hand.`,
 		play_neighbors: (params) =>  `Play adjacent cards to this`,
-		yield: (params, money) =>  `+${Math.round(params.growth_factor - 1 * money)} (+${Math.round((params.growth_factor - 1) * 100)}% of balance)`,
+		yield: (params, money) =>  `+${Math.round((params.growth_factor - 1) * money)} (+${Math.round((params.growth_factor - 1) * 100)}% of balance)`,
 	};
 
 	static effect_descriptions = {
