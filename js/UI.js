@@ -18,7 +18,7 @@ class UI{
 		if (uses == null){
 			uses = '&infin;';
 		}
-		return `<div id='hand-${id}' class='card ${buyable_class} ${card.category}'>
+		return `<div id='hand-${id}' class='card ${buyable_class} '>
 			<div class='card_header'>${uses}</div>
 			<div class='card_description'>${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}</div>
 			${market_label}
@@ -26,7 +26,7 @@ class UI{
 	}
 
 	refresh(){
-		$("#money").html(game.player.money);
+		$("#money").html(game.player.money.toLocaleString());
 		let txt = "";
 		for (let id in game.hand){
 			let card = game.hand[id];
@@ -47,6 +47,6 @@ class UI{
 		}
 		$("#effects").html(txt);
 		$("#turn_section").html(game.turns);
-		$("#total_earnings_section").html("$" + game.player.total_earned + " [" + game.card_class + "]");
+		$("#total_earnings_section").html("$" + game.player.total_earned.toLocaleString() + " [" + game.card_class + "]");
 	}
 }

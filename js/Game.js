@@ -41,10 +41,15 @@ class Game{
 		this.hand.splice(id, 1);
 	}
 
-	does_card_expire(id){
-		console.log(id, 'play() [54] - error', this.hand, this.hand[id].uses, this.hand[id].uses !== null, this.hand[id].uses < 1);
-		if (this.hand[id].uses !== null && this.hand[id].uses < 1 ){
-			this.discard(id);
+	does_card_expire(uid){
+		for (let id in this.hand){
+			let card = this.hand[id]
+			if (card.uid != uid){
+				continue;
+			}
+			if (this.hand[id].uses !== null && this.hand[id].uses < 1 ){
+				this.discard(id);
+			}
 		}
 	}
 
@@ -57,7 +62,6 @@ class Game{
 			}			
 		}
 		this.turns ++;
-		console.log(this.player.bonus);
 	}
 
 	is_card_in_hand(type){
@@ -79,13 +83,16 @@ class Game{
 	}
 
 	play(id){
-		this.hand[id].play(this, this.player, id);
+		let card = this.hand[id];
+		let uid = card.uid;
+		card.play(this, this.player, id);
 		for (let card of this.market){
 			card.dies();			
 		}
         this.market = this.market.filter( card => card.market_expires > 0);
 		this.add_card_to_market();
-		this.does_card_expire(id);	
+		
+		this.does_card_expire(uid);	
 	}
 
 

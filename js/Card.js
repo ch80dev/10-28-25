@@ -34,25 +34,30 @@ const card_effect_handlers = {
             }            
             game.hand[card_id].play(game, player, card_id);            
         }
-        for (let card_id in game.hand){
-            game.does_card_expire(Number(card_id));
+        for (let card of game.hand){
+
+            game.does_card_expire(card.uid);
         }
 
 
     },
     yield: (game, player, params) => {
-        player.money *= params.yield
+        let interest = player.money * params.yield;
+        console.log(interest, typeof interest);
+        player.earn(interest);
     },
     play_neighbors: (game, player, params, id) => {
         let prev_id = id - 1;
         if (prev_id >= 0){
-            game.hand[prev_id].play(game, player, prev_id);            
-            game.does_card_expire(prev_id);
+            let card = game.hand[prev_id];
+            card.play(game, player, prev_id);            
+            game.does_card_expire(card.uid);
         }
         let next_id = id + 1;
         if (next_id <= Config.hand_limit - 1 && (next_id + 1 <= game.hand.length)){
-            game.hand[next_id].play(game, player, next_id);            
-            game.does_card_expire(next_id);
+            let card = game.hand[next_id];
+            card.play(game, player, next_id);            
+            game.does_card_expire(card.uid);
         }
     },
     // Add other effect types here (upgrade, investment, etc.)
@@ -69,6 +74,8 @@ class Card {
         this.effect_params = effect_params; // Parameters specific to the effect
         this.market_expires = 5;
         this.uses = uses;                 // Number of times this card can be used
+        this.uid = crypto.randomUUID();
+        console.log(this.uid);
     }
     dies(){
         this.market_expires --;

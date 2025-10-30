@@ -5,7 +5,6 @@ class CardGenerator {
             let rand_category = card_categories[fetch_rand(0, card_categories.length - 1)];
             let in_hand = game.is_card_in_hand('play_all');
             let in_market = game.is_card_in_market('play_all');
-            console.log(in_hand, in_market);
             if (card_class < 10 && rand_category == 'finance' 
                 || (rand_category == 'play' && (in_hand || in_market)) ){
                 continue;

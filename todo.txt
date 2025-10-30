@@ -17,3 +17,6 @@ the positional thing of each card needs to be tied to card_class ? I don't know 
 weird css thing of cards moving down randomly as the game progresses
 too many play all cards at the same time.
 
+too much text - need to be able to visually distinguish between cards intuitively
+
+change invest to where it adds <x> to every -other- card and gains interest on that amount until its discarded
