@@ -35,7 +35,7 @@ const card_effect_handlers = {
             game.hand[card_id].play(game, player, card_id);            
         }
         for (let card_id in game.hand){
-            game.does_card_expire(card_id);
+            game.does_card_expire(Number(card_id));
         }
 
 

@@ -11,5 +11,10 @@ class Config {
 		play_all: (params) =>  `Play all cards in hand.`,
 		play_neighbors: (params) =>  `Play adjacent cards to this`,
 		yield: (params, money) =>  `+${Math.round(params.growth_factor - 1 * money)} (+${Math.round((params.growth_factor - 1) * 100)}% of balance)`,
-	}
+	};
+
+	static effect_descriptions = {
+		boost_income: (params) => `+${params.remove_bonus_when_expires} to income for ${params.expires_in} turn(s)`,
+		income_per_turn: (params) => `+${params.amount} per turn for ${params.expires_in} turn(s)`,
+	};
 }

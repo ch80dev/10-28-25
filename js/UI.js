@@ -41,8 +41,9 @@ class UI{
 		$("#market").html(txt);
 		txt = "";
 		for (let effect of game.player.effects){
-			let params = Object.entries(effect.params).map(([k,v]) => `${k}: ${v}`).join(", ");
-			txt += `<div class='effect'>${effect.name}: ${params}</div>`
+			
+			
+			txt += `<div class='effect'>${Config.effect_descriptions[effect.name](effect.params)}</div>`
 		}
 		$("#effects").html(txt);
 		$("#turn_section").html(game.turns);
