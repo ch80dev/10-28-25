@@ -68,7 +68,7 @@ class UI{
 	}
 
 	leave(){
-		$("#money").html(game.player.money);
+		$("#money").html(game.player.money.toLocaleString());
 		$("#money_section").css("font-weight", 'normal');
 		$("#money_change").html("");
 		$("#money_change").css('color', '');

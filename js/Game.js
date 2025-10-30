@@ -31,16 +31,16 @@ class Game{
 	
 
 	discard(id){
-		console.log('discarding', id, typeof id)
+		//console.log('discarding', id, typeof id)
 		let card = this.hand[id];
-		console.log(card);
+		//console.log(card);
 		if (card.effect_type == 'invest'){
 			console.log('INVEST VESTEd', card.effect_params, card.effect_params.balance, typeof card.effect_params.balance);
 			this.player.earn(this, card.effect_params.balance);
 		}
-		console.log('about to discard', this.hand);
+		//console.log('about to discard', this.hand);
 		this.hand.splice(id, 1);
-		console.log('discarded', this.hand);
+		//console.log('discarded', this.hand);
 	}
 
 	does_card_expire(uid){
@@ -60,7 +60,7 @@ class Game{
 		this.player.run_effects(this);
 		for (let card of this.hand){
 			if (card.effect_type == 'invest'){
-				console.log(card.effect_params);
+				//console.log(card.effect_params);
 				card.effect_params.balance = Math.round(card.effect_params.balance * card.effect_params.growth_factor);
 			}			
 		}

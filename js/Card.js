@@ -35,7 +35,7 @@ const card_effect_handlers = {
             game.hand[card_id].play(game, player, card_id);            
         }
         
-        for (let id = game.hand.length - 1; id >= 0; i --){
+        for (let id = game.hand.length - 1; id >= 0; id --){
             let card = game.hand[id];
             game.does_card_expire(card.uid);
         }
@@ -43,8 +43,7 @@ const card_effect_handlers = {
 
     },
     yield: (game, player, params) => {
-        let interest = player.money * params.yield;
-        console.log(player.money, params.yield, interest, typeof interest);
+        let interest = player.money * params.growth_factor;
         player.earn(interest);
     },
     play_neighbors: (game, player, params, id) => {
