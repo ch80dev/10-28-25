@@ -12,4 +12,8 @@ double duration of all active effects
 
 
 TODO
-the positional thing of each card needs to be tied to card_class
+the positional thing of each card needs to be tied to card_class ? I don't know what this means.
+
+weird css thing of cards moving down randomly as the game progresses
+too many play all cards at the same time.
+

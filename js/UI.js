@@ -14,8 +14,12 @@ class UI{
 			market_label = `<div class='market_expires market_expires-${card.market_expires}'>[ ${card.market_expires} ]</div>
 			<div class='card_cost'> -$${card.cost + Number(id)}</div>`
 		}
+		let uses = card.uses;
+		if (uses == null){
+			uses = '&infin;';
+		}
 		return `<div id='hand-${id}' class='card ${buyable_class} ${card.category}'>
-			<div class='card_header'>${card.uses}</div>
+			<div class='card_header'>${uses}</div>
 			<div class='card_description'>${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}</div>
 			${market_label}
 		</div>`

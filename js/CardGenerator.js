@@ -1,12 +1,15 @@
 class CardGenerator {
-    fetch_rand_category(card_class){
+    fetch_rand_category(game, card_class){
         const card_categories = ['finance', 'income', 'upgrade', 'play'];
-        
-        let rand_category = card_categories[fetch_rand(0, card_categories.length - 1)];
-        if (card_class < 10 && rand_category == 'finance'){
-            return this.fetch_rand_category(card_class);
+        while(true){
+            let rand_category = card_categories[fetch_rand(0, card_categories.length - 1)];
+            if (card_class < 10 && rand_category == 'finance' 
+                || (rand_category == 'play' && game.is_card_in_hand('play_all') && game.is_card_in_market('play_all')) ){
+                continue;
+            }
+            return rand_category;    
         }
-        return rand_category;
+        
         
     }
 
@@ -72,8 +75,8 @@ class CardGenerator {
         }
     }
 
-    get (player, card_class){        
-        let rand_category = this.fetch_rand_category(card_class);
+    get (game, player, card_class){        
+        let rand_category = this.fetch_rand_category(game, card_class);
         for (let i = 0; i < 100; i ++){
             let card = this.generate[rand_category](player, card_class);
             if (card.cost > (player.money + 1) * 2 || (card.effect_type == 'gain_immediate' && card.effect_params.amount == 1)){
@@ -85,9 +88,9 @@ class CardGenerator {
         return null;
     }
 
-    go(player, card_class){
+    go(game, player, card_class){
         while(true){
-            let card= this.get(player, card_class);
+            let card= this.get(game, player, card_class);
             if (card != null){
                 return card;
             }

@@ -31,7 +31,7 @@ const card_effect_handlers = {
         for (let card_id = game.hand.length - 1; card_id >= 0; card_id --){
             if (card_id == id){
                 continue;
-            }
+            }            
             game.hand[card_id].play(game, player, card_id);            
         }
         for (let card_id in game.hand){

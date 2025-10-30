@@ -13,7 +13,7 @@ class Game{
 	}
 
 	add_card_to_market(){
-		this.market.push(this.card_generator.go(this.player, this.card_class));
+		this.market.push(this.card_generator.go(this, this.player, this.card_class));
 	}
 
 	buy(id){
@@ -48,16 +48,6 @@ class Game{
 		}
 	}
 
-	play(id){
-		this.hand[id].play(this, this.player, id);
-		for (let card of this.market){
-			card.dies();			
-		}
-        this.market = this.market.filter( card => card.market_expires > 0);
-		this.add_card_to_market();
-		this.does_card_expire(id);	
-	}
-
 	do_turn(){
 		this.player.run_effects(this);
 		for (let card of this.hand){
@@ -69,4 +59,34 @@ class Game{
 		this.turns ++;
 		console.log(this.player.bonus);
 	}
+
+	is_card_in_hand(type){
+		for (let card of this.hand){
+			if (card.effect_type == type){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	is_card_in_market(type){
+		for (let card of this.market){
+			if (card.effect_type == type){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	play(id){
+		this.hand[id].play(this, this.player, id);
+		for (let card of this.market){
+			card.dies();			
+		}
+        this.market = this.market.filter( card => card.market_expires > 0);
+		this.add_card_to_market();
+		this.does_card_expire(id);	
+	}
+
+
 }
