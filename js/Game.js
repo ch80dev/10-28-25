@@ -8,7 +8,7 @@ class Game{
 	turns = 0;
 	constructor(){
 		setInterval(this.loop.go(), Config.loop_interval_timing);
-		this.hand.push(new Card('income', 0, 'gain_immediate', {amount: 1}, null ));
+		this.hand.push(new Card('income', 0, 'gain_immediate', {amount: 1}, null, this.card_class ));
 		this.add_card_to_market();
 	}
 

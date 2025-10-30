@@ -6,23 +6,37 @@ class UI{
 	get_card(id, card, for_market){
 		//console.log(id, card, for_market);
 		let buyable_class = "";
+		let card_txt = "<div class='card_container'>";
 		if (for_market && game.player.money < card.cost + Number(id)){
 			buyable_class = ' no_buy '
 		}
-		let market_label = "";
-		if (for_market){			
-			market_label = `<div class='market_expires market_expires-${card.market_expires}'>[ ${card.market_expires} ]</div>
-			<div class='card_cost'> -$${card.cost + Number(id)}</div>`
+		let market_expires = '';
+		let market_header = "";
+		let market_footer = '';
+		if (for_market){		
+			market_expires = ` market_expires-${card.market_expires} `
+			market_header = `<div class='market_expires'>
+							${card.market_expires} </div>`
+			market_footer = `<div class='card_cost'> -$${card.cost.toLocaleString()}</div>`
 		}
 		let uses = card.uses;
 		if (uses == null){
 			uses = '&infin;';
 		}
-		return `<div id='hand-${id}' class='card ${buyable_class} '>
-			<div class='card_header'>${uses}</div>
-			<div class='card_description'>${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}</div>
-			${market_label}
-		</div>`
+		card_txt += market_header;
+		card_txt += 	`<div id='hand-${id}' class='card ${buyable_class} ${market_expires} '>
+							<div class='card_header'>
+							<span class='card_uses'>${uses}</span>
+
+							
+							</div>
+							<div class='card_description'>
+							${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}
+							<div><div class='card_footer'><span class='card_class'>[ ${card.class} ]</span></div>
+						</div>`
+		card_txt += market_footer;
+		card_txt += "</div>";
+		return card_txt;
 	}
 
 	refresh(){
@@ -47,6 +61,7 @@ class UI{
 		}
 		$("#effects").html(txt);
 		$("#turn_section").html(game.turns);
-		$("#total_earnings_section").html("$" + game.player.total_earned.toLocaleString() + " [" + game.card_class + "]");
+		$("#total_earnings_section").html("$" + game.player.total_earned.toLocaleString() );
+		$("#card_class").html(" [" + game.card_class.toLocaleString() + "]");
 	}
 }

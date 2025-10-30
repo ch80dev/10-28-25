@@ -35,9 +35,9 @@ class Player {
         }
     }
     get_card_class(n) {
-        if (n < 11) return 1; // handle 0 or negatives gracefully
-        const pow = Math.floor(Math.log10(n)); // number of digits - 1
-        return Math.pow(10, pow);
+        if (n < 101) return 1; // handle 0 or negatives gracefully
+        const pow = Math.floor(Math.log10(n) / 2); // number of digits - 1
+        return Math.pow(100, pow);
     }
     spend(amount){
         if (this.money < amount){

@@ -43,7 +43,7 @@ const card_effect_handlers = {
     },
     yield: (game, player, params) => {
         let interest = player.money * params.yield;
-        console.log(interest, typeof interest);
+        console.log(player.money, params.yield, interest, typeof interest);
         player.earn(interest);
     },
     play_neighbors: (game, player, params, id) => {
@@ -66,9 +66,10 @@ const card_effect_handlers = {
 // Card class
 class Card {
     // Explicit property declarations
-    constructor( category, cost, effect_type, effect_params, uses = 1) {   
+    constructor( category, cost, effect_type, effect_params, uses = 1, card_class) {   
         //console.log( category, cost, effect_type, effect_params, uses);
         this.category = category;         // e.g., "Direct Income", "Investment", "Upgrade"
+        this.class = card_class;
         this.cost = cost;                 // How much money it costs to play the card
         this.effect_type = effect_type;     // Which generic effect handler to use
         this.effect_params = effect_params; // Parameters specific to the effect

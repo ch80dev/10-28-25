@@ -30,7 +30,7 @@ class CardGenerator {
             }
             let cost = Math.round(player.total_earned * Math.pow(growth_factor, total_uses) * cost_modifier); 
             console.log('finance', cost, card_type, growth_factor, total_uses);
-            return new Card('finance', cost, card_type, { amount: card_class * modifier, growth_factor: growth_factor, balance: 0 }, total_uses);
+            return new Card('finance', cost, card_type, { amount: card_class * modifier, growth_factor: growth_factor, balance: 0 }, total_uses, card_class);
         }, 
         
         income: (player, card_class) => {
@@ -47,7 +47,7 @@ class CardGenerator {
             }
             let cost_modifier = fetch_rand(10, 30) * .01;
             let cost = Math.ceil(total_income * cost_modifier);
-            return new Card('income', cost, card_type, params, total_uses);
+            return new Card('income', cost, card_type, params, total_uses, card_class);
         }, 
         on_discard: (player, card_class) => {
 
@@ -61,7 +61,7 @@ class CardGenerator {
                 cost_modifier = 1;
             }
             let cost = Math.ceil(player.total_earned * cost_modifier) + 1;
-            return new Card('play', cost, card_type, {}, total_uses);
+            return new Card('play', cost, card_type, {}, total_uses, card_class);
         },
         
         upgrade: (player, card_class) => {
@@ -73,7 +73,7 @@ class CardGenerator {
             let params = {amount: card_class* modifier, expires_in: expires_in}
             let cost_modifier = fetch_rand(10, 30) * .01;            
             let cost = Math.ceil(total_income * cost_modifier);
-            return new Card('upgrade', cost, card_type, params, total_uses);
+            return new Card('upgrade', cost, card_type, params, total_uses, card_class);
         }
     }
 
