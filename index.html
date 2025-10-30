@@ -9,10 +9,13 @@
 	<title> </title>
 	<style>
 		.card_container{
-			width:155px;
+			width: 170px;
+			height: 250px;
 			display: inline-block;
 			vertical-align: top;
-
+			margin-right: 15px;
+			margin-bottom: 10px;
+			position: relative;
 		}
 		.card {
 			width: 150px;
@@ -20,8 +23,8 @@
 			border: 1px solid black;
 			background-color: white;
 			display: block;
-			
-			margin: 5px;
+			position: relative;
+			margin: 2px auto;
 		}
 		.card_class {
 			font-size: 15px;
@@ -29,27 +32,32 @@
 		}
 		.card_cost{
 			display: block;
-			text-align:center;
-			width: 100%;			
+			text-align: center;
+			width: 150px;			
 			font-size: 20px;
 			color: red;
+			background-color: white;
+			margin: 5px auto 0 auto;
 		}
 		.card_description{
 			text-align: center;
-			
-			width: 150px;
+			width: 100%;
 			font-size: 15px;
+			padding: 5px;
+			box-sizing: border-box;
+			margin-bottom: 30px;
 		}
 		.card_header{
 			background-color: lightgray;
 			font-size: 20px;
-			text-align:center;
-
+			text-align: center;
+			padding: 5px;
 		}
 		.card_footer{
-			position:absolute;
+			position: absolute;
 			bottom: 0;
-			width: 100%;
+			width: calc(100% - 2px);
+			left: 0;
 		}
 		.card:not(.no_buy):hover {
 			cursor: pointer;
@@ -66,7 +74,7 @@
 			color: darkgreen;
 		}
 		.market_expires{
-			text-align:center;
+			text-align: center;
 			font-size: 40px;
 			color: lightgrey;
 		}
@@ -140,7 +148,6 @@
 		#market{
 			padding-left: 250px;
 			padding-top: 100px;
-			
 			text-align: left;
 		}
 		#total_earnings_section {

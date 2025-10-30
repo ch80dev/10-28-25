@@ -24,16 +24,17 @@ class UI{
 			uses = '&infin;';
 		}
 		card_txt += market_header;
-		card_txt += 	`<div id='hand-${id}' class='card ${buyable_class} ${market_expires} '>
-							<div class='card_header'>
-							<span class='card_uses'>${uses}</span>
-
-							
-							</div>
-							<div class='card_description'>
-							${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}
-							<div><div class='card_footer'><span class='card_class'>[ ${card.class} ]</span></div>
-						</div>`
+		card_txt += 	
+			`<div id='hand-${id}' class='card ${buyable_class} ${market_expires} '>
+				<div class='card_header'>
+					<span class='card_uses'>${uses}</span>							
+				</div>
+				<div class='card_description'>
+					${Config.card_descriptions[card.effect_type](card.effect_params, game.player.money)}
+				</div><div class='card_footer'>
+					<span class='card_class'>[ ${card.class} ]</span>
+				</div>
+			</div>`
 		card_txt += market_footer;
 		card_txt += "</div>";
 		return card_txt;
