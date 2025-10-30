@@ -57,17 +57,27 @@ class UI{
 			$("#money_change").html(` (+${(card.effect_params.amount + game.player.bonus).toLocaleString()})`);
 			$("#money_change").css('color', '#00FF88');
 		} else if (where == 'market'){
-			console.log(card.cost);
+			
 			let new_balance = (game.player.money - card.cost).toLocaleString();
 			$("#money").html(new_balance);
 			$("#money_section").css("font-weight", 'bold');
 			$("#money_change").html(` (-${card.cost})`);
-			console.log($("#money_change").html())
+			
 			$("#money_change").css('color', '#FF3B3B');
+
+			
+		}
+		if (where == 'market' && game.hand.length >= Config.hand_limit){
+			$("#hand-0").css('opacity', .2);
+			$("#hand-0").addClass('highlight-remove');
 		}
 	}
 
 	leave(){
+		$("#hand-0").css('opacity', 1);
+		if ($("#hand-0").hasClass('highlight-remove')){
+			$("#hand-0").removeClass('highlight-remove');
+		}
 		$("#money").html(game.player.money.toLocaleString());
 		$("#money_section").css("font-weight", 'normal');
 		$("#money_change").html("");
