@@ -33,16 +33,19 @@ class Game{
 	discard(id){
 		console.log('discarding', id, typeof id)
 		let card = this.hand[id];
+		console.log(card);
 		if (card.effect_type == 'invest'){
 			console.log('INVEST VESTEd', card.effect_params, card.effect_params.balance, typeof card.effect_params.balance);
 			this.player.earn(this, card.effect_params.balance);
 		}
-		
+		console.log('about to discard', this.hand);
 		this.hand.splice(id, 1);
+		console.log('discarded', this.hand);
 	}
 
 	does_card_expire(uid){
 		for (let id in this.hand){
+			id = Number(id);
 			let card = this.hand[id]
 			if (card.uid != uid){
 				continue;

@@ -78,6 +78,7 @@ class UI{
 		$("#money").html(game.player.money.toLocaleString());
 		let txt = "";
 		for (let id in game.hand){
+			id = Number(id);
 			let card = game.hand[id];
 			txt += this.get_card(id, card, false);
 		}

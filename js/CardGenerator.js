@@ -87,6 +87,7 @@ class CardGenerator {
             return card;
             
         }
+        console.log(rand_category, "get overloaded");
         return null;
     }
 
